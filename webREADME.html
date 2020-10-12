@@ -438,11 +438,66 @@ html,body{        margin: auto;
 <div class="document" id="ssh">
 <h1 class="title">SSH</h1>
 
-<p>Referensi</p>
+<div class="contents topic" id="daftar-isi">
+<p class="topic-title"><strong>Daftar Isi</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#ssh-login-tanpa-password" id="id1">SSH Login Tanpa Password</a></li>
+</ul>
+</div>
+<div class="section" id="ssh-login-tanpa-password">
+<h1><a class="toc-backref" href="#id1">SSH Login Tanpa Password</a></h1>
+<p><strong>SSH Key Pair</strong></p>
+<p>Misalnya ada 2 buah komputer, client dan server. Komputer client ingin login ke
+server menggunakan ssh tetapi tidak menggunakan password melainkan menggunakan
+<em>public key</em>. Caranya adalah:</p>
+<p>Pada komputer client:</p>
+<ul class="simple">
+<li>Generate SSH key pair</li>
+</ul>
+<pre class="literal-block">
+ssh-keygen -t rsa -b 4096 -C &quot;your_email&#64;domain.com&quot;
+</pre>
+<p>Secara <em>default</em> nama ssh file yang digunakan adalah id_rsa. Namun apabila
+terdapat banyak <tt class="docutils literal">id_rsa</tt> yang telah dibuat sebelumnya, maka simpanlah dengan nama
+berbeda, misalnya <tt class="docutils literal">id_rsa_baru</tt>. Hasilnya <em>command</em> di atas akan menghasilkan
+2 buah file yang bernama <tt class="docutils literal">id_rsa_baru</tt> dan <tt class="docutils literal">id_rsa_baru.pub</tt>. File tanpa
+<em>extension</em> adalah <em>private key</em> dan file dengan <em>extension</em> <tt class="docutils literal">.pub</tt> adalah
+<em>public key</em>.</p>
+<ul class="simple">
+<li>Buatlah config file</li>
+</ul>
+<pre class="literal-block">
+#baru
+Host namahost
+        HostName namahost
+        User namauser
+        IdentityFile ~/.ssh/id_rsa_baru
+</pre>
+<p>Pastikan untuk mengisi <tt class="docutils literal">HostName</tt> dan <tt class="docutils literal">User</tt> secara benar.</p>
+<p>Pada komputer <em>server</em>:</p>
+<ul class="simple">
+<li>Copy <em>public key</em> dan <em>rename</em> menjadi <tt class="docutils literal">authorized_keys</tt>. Simpan file
+tersebut di <tt class="docutils literal"><span class="pre">~/.ssh/authorized_keys</span></tt>.</li>
+<li>Ganti <em>file permission*</em>:</li>
+</ul>
+<pre class="literal-block">
+$ chmod 700 ~/.ssh
+$ chmod 600 ~/.ssh/authorized_keys
+</pre>
+<p><strong>Tes Koneksi</strong></p>
+<pre class="literal-block">
+$ ssh username&#64;hostname
+</pre>
+<p>atau</p>
+<pre class="literal-block">
+$ ssh username&#64;ipaddress
+</pre>
+<p><strong>Referensi</strong></p>
 <ul class="simple">
 <li><a class="reference external" href="https://www.ssh.com/ssh/">SSH Webpage</a></li>
 <li><a class="reference external" href="https://www.techjunkie.com/ssh-login-without-key-password/">Use ssh login without key or password</a></li>
 </ul>
+</div>
 </div>
 </body>
 </html>
