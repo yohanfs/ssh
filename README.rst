@@ -3,6 +3,20 @@ SSH
 
 .. contents:: **Daftar Isi**
 
+Install SSH 
+---------------------------------------------------------------------------------
+
+**Ubuntu**
+
+::
+
+	$ sudo apt-get install openssh-server
+
+**Referensi**
+
+- `Install ssh server di ubuntu`_
+
+
 SSH Login Tanpa Password
 ---------------------------------------------------------------------------------
 
@@ -68,3 +82,10 @@ atau
 
 - `SSH Webpage <https://www.ssh.com/ssh/>`_
 - `Use ssh login without key or password <https://www.techjunkie.com/ssh-login-without-key-password/>`_
+
+
+
+.. Referensi
+
+
+.. _`Install ssh server di ubuntu`: https://www.cyberciti.biz/faq/ubuntu-linux-install-openssh-server/
